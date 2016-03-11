@@ -1,0 +1,28 @@
+{
+  "name": "synth",
+  "version": "1.0.0",
+  "description": "Back end capstone.  Synthesizer with web sockets",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "serve": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andersonmcook/synth.git"
+  },
+  "author": "Anderson Cook <andersonmcook@gmail.com> (https://github.com/andersonmcook)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andersonmcook/synth/issues"
+  },
+  "homepage": "https://github.com/andersonmcook/synth#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jade": "^1.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
+  }
+}
