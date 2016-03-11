@@ -10,7 +10,13 @@ html
     #test
     #kill
     #xy
-    input#slider(type='range' min='0' max='10')
+    input#slider(type='range' min='0' max='1' step='.1')
     input#hertz(type='range' min='0' max='1000' step='10')
+    div
+      select#shape(name='shape')
+        option(value='sine') sine
+        option(value='square') square
+        option(value='sawtooth') sawtooth
+        option(value='triangle') triangle
 
     script(src='js/main.js')
