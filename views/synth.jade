@@ -10,8 +10,14 @@ html
     #test
     #kill
     #xy
-    input#slider(type='range' min='0' max='1' step='.1')
-    input#hertz(type='range' min='0' max='1000' step='10')
+    div
+      label(for='slider') Volume
+        span#volumeText 0.5
+      input#slider(type='range' min='0' max='1' step='.1')
+    div
+      label(for='hertz') Hertz
+        span#hertzText 500
+      input#hertz(type='range' min='0' max='1000' step='10')
     div
       select#shape(name='shape')
         option(value='sine') sine

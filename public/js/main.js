@@ -18,6 +18,7 @@ gain.gain.value = 0.5;
 function volume () {
   console.log('slider', slider.value)
   gain.gain.value = slider.value
+  volumeText.innerHTML = slider.value
 }
 // function testSound () {
 //   const osc = audio.createOscillator();
@@ -48,13 +49,21 @@ const xy = document.getElementById('xy')
 xy.addEventListener('mousemove', box)
 
 const shape = document.getElementById('shape')
-shape.addEventListener('change', shaper)
+shape.addEventListener('change', getter(shape))
+
+const hertzText = document.getElementById('hertzText')
+const volumeText = document.getElementById('volumeText')
 // LISTENERS END
 
+// gets wave shape from select options
+// function shaper () {
+//   // console.log(shape.value)
+//   return shape.value
+// }
 
-function shaper () {
-  console.log(shape.value)
-  return shape.value
+// a getter that can get lots of things
+function getter (element) {
+  return element.value
 }
 
 
@@ -68,11 +77,15 @@ function testFunc () {
   // console.log('slider', slider.value)
   console.log('hertz', hertz.value)
   // osc.type = "square";
-  osc.type = shaper()
+  // osc.type = shaper()
+  const gotHertz = getter(hertz)
 
-  osc.frequency.value = hertz.value || 100
+  osc.type = getter(shape)
+
+  // osc.frequency.value = hertz.value || 100
+  osc.frequency.value = gotHertz || 100
   osc.connect(gain);
-
+  hertzText.innerHTML = gotHertz
 }
 
   // const osc = audio.createOscillator()
@@ -81,8 +94,8 @@ function box (e) {
   gain.connect(audio.destination)
   // console.log(e.clientX)
   // osc.type = "square";
-  osc.type = shaper()
-
+  // osc.type = shaper()
+  osc.type = getter(shape)
   osc.frequency.value = e.clientX / 3
   osc.connect(gain);
 }
