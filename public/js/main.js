@@ -28,10 +28,13 @@ const test = document.getElementById('test')
 test.addEventListener('click', testFunc)
 
 const kill = document.getElementById('kill')
-kill.addEventListener('click', killer)
+kill.addEventListener('mouseover', killer)
 
 const hertz = document.getElementById('hertz')
 hertz.addEventListener('input', testFunc)
+
+const xy = document.getElementById('xy')
+xy.addEventListener('mousemove', box)
 
 
   const osc = audio.createOscillator()
@@ -42,14 +45,24 @@ function testFunc () {
   const slider = document.getElementById('slider')
   console.log('slider', slider.value)
   console.log('hertz', hertz.value)
-
   osc.type = "square";
+
   osc.frequency.value = hertz.value || 100
   osc.connect(gain);
 
 
 
 }
+
+function box (e) {
+  gain.connect(audio.destination)
+  console.log(e.clientX)
+  osc.type = "square";
+
+  osc.frequency.value = e.clientX
+  osc.connect(gain);
+}
+
 
 function killer () {
   // const osc = audio.createOscillator()
