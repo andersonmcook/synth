@@ -1,5 +1,11 @@
 #test {
   width: 200px;
   height: 200px;
-  background: black;
+  background: orange;
+}
+
+#kill {
+  width: 100px;
+  height: 100px;
+  background: pink;
 }
