@@ -20,9 +20,11 @@
   "homepage": "https://github.com/andersonmcook/synth#readme",
   "dependencies": {
     "express": "^4.13.4",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "socket.io": "^1.4.5"
   },
   "devDependencies": {
+    "bower": "^1.7.7",
     "nodemon": "^1.9.1"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "name": "synth",
+  "description": "Back end capstone.  Synthesizer with web sockets",
+  "main": "server.js",
+  "authors": [
+    "Anderson Cook <andersonmcook@gmail.com> (https://github.com/andersonmcook)"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/andersonmcook/synth",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "socket.io-client": "^1.4.5"
+  }
+}
