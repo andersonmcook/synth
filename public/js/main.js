@@ -2,7 +2,7 @@
   'use strict'
   console.log('in main.js')
 
-  // SOCKETS
+// SOCKETS
   const ws = io.connect()
 
   ws.on('connect', () => {
@@ -19,12 +19,9 @@
     receiveNotes(notes)
   })
 
-  //in a function
-     // ws.emit('sendChat', chat) // here chat is an object with a name and text key
+// END SOCKETS
 
-  // END SOCKETS
-
-  // AUDIO CONTEXT
+// AUDIO CONTEXT
   window.AudioContext = window.AudioContext || window.webkitAudioContext
 
   if (!AudioContext) {
@@ -50,13 +47,13 @@
   //   osc.frequency.value = 3000;
   //   osc.connect(gain);
   // }
-  // END AUDIO CONTEXT
+// END AUDIO CONTEXT
 
-  // TEST
+// TEST
   // const osc = audio.createOscillator()
 
 
-  // LISTENERS
+// LISTENERS
   const slider = document.getElementById('slider')
   slider.addEventListener('input', volume)
 
@@ -72,8 +69,14 @@
   // const xy = document.getElementById('xy')
   // xy.addEventListener('mousemove', box)
 
+  // should only listen when this div has focus so typing in chat doesn't trigger sounds
+  const pageContentWrapper = document.getElementById('page-content-wrapper')
   // keydown function
-  document.addEventListener('keydown', pressKey)
+  // document.addEventListener('keydown', pressKey)
+  pageContentWrapper.addEventListener('keydown', pressKey)
+  // keyup function
+  pageContentWrapper.addEventListener('keyup', releaseKey)
+  // document.addEventListener('keyup', releaseKey)
 
   // shape listener
   const shape = document.getElementById('shape')
@@ -82,7 +85,7 @@
   // hertz listener
   const hertzText = document.getElementById('hertzText')
   const volumeText = document.getElementById('volumeText')
-  // LISTENERS END
+// LISTENERS END
 
   // gets wave shape from select options
   // function shaper () {
@@ -171,7 +174,7 @@
     osc.frequency.value = 0
     gain.disconnect(audio.destination)
   }
-  // END TEST
+// END TEST
 
 
 // KEYS
@@ -288,7 +291,6 @@
     }
   }
 
-  document.addEventListener('keyup', releaseKey)
 
 
 
