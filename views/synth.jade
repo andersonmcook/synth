@@ -6,34 +6,47 @@ html
   body
     div#wrapper
       div#sidebar-wrapper
+        form#chat-form
+          .form-group
+            .input-group
+              span(class="input-group-addon" id="name-symbol" aria-hidden="true") U
+              input#chat-name(type='text' name='name' placeholder='Name' class='form-control' aria-describedby='name-symbol')
+            .input-group
+              span(class="input-group-addon" id="text-symbol" aria-hidden="true") C
+              input#chat-text(type='text' name='text' placeholder='Chat Text' class='form-control' aria-describedby='text-symbol')
+            input(type='submit')
         ul.sidebar-nav
-          li.sidebar-brand
-          li hey
+          li
+            a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Close Chat
+          li.sidebar-brand yo hey
+          ul#chat-list.list-group CHAT
+            li.chats.list-group-item Anderson: a sample chat
 
 
+      div#page-content-wrapper
+        div.container-fluid
+          h1= options.title
 
-      h1= options.title
 
-
-      #test
-      #kill
-      //- #xy
-      div
-        label(for='slider') Volume
-          span#volumeText 0.5
-        input#slider(type='range' min='0' max='1' step='.1')
-      div
-        label(for='hertz') Hertz
-          span#hertzText 500
-        input#hertz(type='range' min='0' max='1000' step='10')
-      div
-        select#shape(name='shape')
-          option(value='sine') sine
-          option(value='square') square
-          option(value='sawtooth') sawtooth
-          option(value='triangle') triangle
-      div
-        a(href="#menu-toggle" class="btn btn-default" id="menu-toggle") Toggle Menu
+          #test
+          #kill
+          //- #xy
+          div
+            label(for='slider') Volume
+              span#volumeText 0.5
+            input#slider(type='range' min='0' max='1' step='.1')
+          div
+            label(for='hertz') Hertz
+              span#hertzText 500
+            input#hertz(type='range' min='0' max='1000' step='10')
+          div
+            select#shape(name='shape')
+              option(value='sine') sine
+              option(value='square') square
+              option(value='sawtooth') sawtooth
+              option(value='triangle') triangle
+          div
+            a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Chat
 
 
     script(src='vendor/jquery/dist/jquery.min.js')
@@ -41,3 +54,4 @@ html
     script(src='vendor/socket.io-client/socket.io.js')
     script(src='js/display.js')
     script(src='js/main.js')
+    script(src='js/chat.js')

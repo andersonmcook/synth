@@ -21,15 +21,38 @@
   margin: auto 1em;
 }
 
+/* TEMP STYLES */
+ul li {
+  color: white;
+}
+
+input[type="submit"] {
+  display: none;
+}
+
+#chat-form {
+  position: absolute;
+  bottom: 0;
+  /*width: 100%;*/
+  /*margin-bottom: 0;*/
+}
+
+#chat-list {
+  background: black;
+  color: white;
+}
+
+.chats {
+  background: black;
+  color: white;
+  line-height: 1em !important;
+  border-radius: 0 !important;
+  margin: .5em;
+  text-indent: 0 !important;
+}
+/* END TEMP STYLES */
+
 /* BOOTSTRAP */
-/*!
- * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
-/* Toggle Styles */
-
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;

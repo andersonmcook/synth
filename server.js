@@ -34,6 +34,11 @@ ws.on('connection', socket => {
     console.log('sound', sound)
     socket.broadcast.emit('receiveSound', sound)
   })
+
+  socket.on('sendChat', msg => {
+    console.log('msg', msg)
+    socket.broadcast.emit('receiveChat', [msg])
+})
 // not currently refreshing like we used to do
 // parameterized query
   // socket.on('sendChat', msg => {
