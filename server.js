@@ -32,6 +32,10 @@ ws.on('connection', socket => {
     socket.broadcast.emit('receiveSound', sound)
   })
 
+  socket.on('sendNotes', notes => {
+    socket.broadcast.emit('receiveNotes', notes)
+  })
+
 // passes around chats
   socket.on('sendChat', msg => {
     console.log('msg', msg)
