@@ -33,8 +33,13 @@ input[type="submit"] {
 #chat-form {
   position: absolute;
   bottom: 0;
+  margin: .5em;
   /*width: 100%;*/
   /*margin-bottom: 0;*/
+}
+
+.input-group > * {
+  border-radius: 0;
 }
 
 #chat-list {
@@ -49,6 +54,11 @@ input[type="submit"] {
   border-radius: 0 !important;
   margin: .5em;
   text-indent: 0 !important;
+}
+
+.menu-toggle {
+  border-radius: 0;
+  text-indent: 0;
 }
 /* END TEMP STYLES */
 

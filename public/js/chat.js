@@ -39,7 +39,7 @@
   function generateLI (chat) {
     const li = document.createElement('li')
     const textNode = document.createTextNode(`${chat.name}: ${chat.text}
-      (${getTime()}) `)
+      (${getTime()})`)
     // const dataId = document.createAttribute('data-id')
     // dataId.value = chat._id
     // li.setAttributeNode(dataId)
@@ -50,7 +50,6 @@
 // get time
   function getTime () {
     const now = new Date()
-    console.log(now.getHours(), now.getMinutes(), now.getSeconds())
     return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
   }
 
