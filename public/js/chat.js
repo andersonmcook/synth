@@ -38,12 +38,20 @@
 // generate list item
   function generateLI (chat) {
     const li = document.createElement('li')
-    const textNode = document.createTextNode(`${chat.name}: ${chat.text}`)
+    const textNode = document.createTextNode(`${chat.name}: ${chat.text}
+      (${getTime()}) `)
     // const dataId = document.createAttribute('data-id')
     // dataId.value = chat._id
     // li.setAttributeNode(dataId)
     li.appendChild(textNode)
     return li
+  }
+
+// get time
+  function getTime () {
+    const now = new Date()
+    console.log(now.getHours(), now.getMinutes(), now.getSeconds())
+    return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
   }
 
 // get JSON from POSTGRES
