@@ -41,33 +41,16 @@
     gain.gain.value = slider.value
     volumeText.innerHTML = slider.value
   }
-  // function testSound () {
-  //   const osc = audio.createOscillator();
-  //   osc.type = "square";
-  //   osc.frequency.value = 3000;
-  //   osc.connect(gain);
-  // }
+
 // END AUDIO CONTEXT
 
 // TEST
-  // const osc = audio.createOscillator()
+
 
 
 // LISTENERS
   const slider = document.getElementById('slider')
   slider.addEventListener('input', volume)
-
-  // const test = document.getElementById('test')
-  // test.addEventListener('click', testFunc)
-
-  // const kill = document.getElementById('kill')
-  // kill.addEventListener('mouseover', killer)
-
-  // const hertz = document.getElementById('hertz')
-  // hertz.addEventListener('input', testFunc)
-
-  // const xy = document.getElementById('xy')
-  // xy.addEventListener('mousemove', box)
 
   // should only listen when this div has focus so typing in chat doesn't trigger sounds
   const pageContentWrapper = document.getElementById('page-content-wrapper')
@@ -124,29 +107,7 @@
     hertzText.innerHTML = sound.frequency
   }
 
-    // const osc = audio.createOscillator()
-    // osc.start()
-  // function box (e) {
-  //   // console.log(e)
-  //   gain.connect(audio.destination)
-  //   // console.log(e.clientX)
-  //   // osc.type = "square";
-  //   // osc.type = shaper()
-  //   osc.type = getter(shape)
-  //   osc.frequency.value = e.clientX / 3
-  //   osc.connect(gain);
-  //   const soundToSend = {frequency: (e.clientX / 3), shape: getter(shape)}
-  //   ws.emit('sendSound', soundToSend)
-  // }
-
-  // function killer () {
-  //   // const osc = audio.createOscillator()
-  //   osc.frequency.value = 0
-  //   gain.disconnect(audio.destination)
-  // }
-
 // END TEST
-
 
 // KEYS
 
@@ -261,32 +222,7 @@
     osc.stop(audio.currentTime + notes.beat)
     osc2.stop(audio.currentTime + notes.beat)
 
-
-    // console.log(getter(tempo))
-    // osc.stop(notes.)
-
     // console.log('received notes', notes)
-    // const garbage = []
-    // for (let i = 0; i < nodes.length; i++) {
-    //   if (nodes[i].code === event.keyCode) {
-    //     nodes[i].node.stop(0)
-    //     nodes[i].node.disconnect()
-    //     garbage.push(i)
-    //   }
-    // }
-    // for (let i = 0; i < garbage.length; i++) {
-    //   nodes.splice(garbage[i], 1)
-    // }
-    console.log('received notes', notes)
-    // const garbage = []
-    // for (let i = 0; i < notes.notes.length; i++) {
-    //   notes.notes[i].node.stop(0)
-    //   notes.notes[i].node.disconnect()
-    //   garbage.push(i)
-    // }
-    // for (let i = 0; i < garbage.length; i++) {
-    //   notes.notes.splice(garbage[i], 1)
-    // }
   }
 
   function releaseKey (event) {
