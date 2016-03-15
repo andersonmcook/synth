@@ -12,7 +12,8 @@ app.set('view engine', 'jade')
 app.use(express.static('public'))
 
 app.locals.options = {
-  title: "synth"
+  title: "synth",
+  users: 0
 }
 
 app.get('/', (req, res) => {
@@ -25,6 +26,7 @@ server.listen(PORT, () => {
 
 ws.on('connection', socket => {
   console.log('server socket connected', socket.id)
+
 
 // passes around sounds
   socket.on('sendSound', sound => {
@@ -41,4 +43,18 @@ ws.on('connection', socket => {
     console.log('msg', msg)
     socket.broadcast.emit('receiveChat', [msg])
   })
+
+  // socket.on('connect', socket => {
+  //   console.log("before ++", app.locals.options.users);
+  //   app.locals.options.users++
+  //   console.log("after ++", app.locals.options.users);
+  // })
+
+  // socket.on('disconnect', socket => {
+  //   console.log('socket disconnected', socket)
+  //   console.log("before --", app.locals.options.users);
+  //   app.locals.options.users--
+  //   console.log("after --", app.locals.options.users);
+  // })
 })
+
