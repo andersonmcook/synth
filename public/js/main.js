@@ -237,13 +237,15 @@
     if (event.keyCode >= 65 && event.keyCode <= 90 && !alreadyPressed) {
       const startNote = new Date()
       const osc = audio.createOscillator()
+      const beat = 60 / (getter(tempo) * 4)
       osc.type = getter(shape)
       osc.frequency.value = frequencyByKey[event.keyCode]
       osc.connect(gain)
       osc.start(0)
+      // HEY MAYBE YOU SHOULD HAVE IT WHERE YOU CAN SELECT THE NOTE LENGTH TOO
+      osc.stop(audio.currentTime + beat)
       // testing length
       // const beat = getter(tempo) / 60 / 16
-      const beat = 60 / (getter(tempo) * 4)
       nodes.push({code: event.keyCode, node: osc, length: startNote})
       const notesToSend = {frequency: frequencyByKey[event.keyCode], shape: getter(shape), notes: nodes, beat: beat }
       // console.log("notes", notesToSend)
