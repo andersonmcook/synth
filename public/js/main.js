@@ -42,6 +42,13 @@
     volumeText.innerHTML = slider.value
   }
 
+  // display values
+  function updateDisplay (element, control) {
+    console.log(element, control)
+    console.log('in updateDisplay')
+    element.innerHTML = control.value
+  }
+
 // END AUDIO CONTEXT
 
 // TEST
@@ -49,7 +56,14 @@
 
 
 // LISTENERS
+
+  // label spans
+  const hertzText = document.getElementById('hertzText')
+  const volumeText = document.getElementById('volumeText')
+  const osc1detune = document.getElementById('osc1detune')
+  const osc2detune = document.getElementById('osc2detune')
   const slider = document.getElementById('slider')
+
   slider.addEventListener('input', volume)
 
   // should only listen when this div has focus so typing in chat doesn't trigger sounds
@@ -65,19 +79,26 @@
 
   // detune 1 listener
   const detune1 = document.getElementById('detune1')
-  detune1.addEventListener('change', getter(detune1))
+  // detune1.addEventListener('change', getter(detune1))
+  // detune1.addEventListener('change', updateDisplay(osc1detune, detune1))
+  detune1.addEventListener('change', function () {
+    getter(detune1)
+    updateDisplay(osc1detune, detune1)
+  })
 
   // detune 2 listener
   const detune2 = document.getElementById('detune2')
-  detune2.addEventListener('change', getter(detune2))
+  // detune2.addEventListener('change', getter(detune2))
+  // detune2.addEventListener('change', updateDisplay(osc2detune, detune2))
+  detune2.addEventListener('change', function () {
+    getter(detune2)
+    updateDisplay(osc2detune, detune2)
+  })
 
   // oscillator 2 listener
   const shape2 = document.getElementById('shape2')
   shape2.addEventListener('change', getter(shape2))
 
-  // hertz listener
-  const hertzText = document.getElementById('hertzText')
-  const volumeText = document.getElementById('volumeText')
 
   // tempo listener
   const tempo = document.getElementById('tempo')

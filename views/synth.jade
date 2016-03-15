@@ -21,7 +21,7 @@ html
           li.sidebar-brand CHAT
 
           ul#chat-list.list-group
-            li.chats.list-group-item Anderson: a sample chat
+            //- li.chats.list-group-item Anderson: a sample chat
 
 
       div#page-content-wrapper(tabindex='0')
@@ -35,7 +35,7 @@ html
           //- #xy
           div.input-group
             label(for='slider') Volume
-              span#volumeText 0.5
+              span#volumeText.updatable-value 0.5
             input#slider(type='range' min='0' max='1' step='.1')
           //- div.input-group
           //-   label(for='hertz') Hertz
@@ -43,29 +43,29 @@ html
           //-   input#hertz(type='range' min='0' max='1000' step='10')
           div.input-group
             label(for='shape') Oscillator 1
-            select#shape(name='shape')
+            select#shape.form-control(name='shape')
               option(value='sine') sine
               option(value='square') square
               option(value='sawtooth') sawtooth
               option(value='triangle') triangle
           div.input-group
             label(for='detune1') Oscillator 1 Detune
+              span#osc1detune.updatable-value 0
             input#detune1(type='range' min='-1200' max='1200')
           div.input-group
             label(for='shape2') Oscillator 2
-            select#shape2(name='shape')
+            select#shape2.form-control(name='shape')
               option(value='sine') sine
               option(value='square') square
               option(value='sawtooth') sawtooth
               option(value='triangle') triangle
           div.input-group
             label(for='detune2') Oscillator 2 Detune
+              span#osc2detune.updatable-value 0
             input#detune2(type='range' min='-1200' max='1200')
           div.input-group
             label(for='tempo') Tempo
             input#tempo(type='number' name='tempo' value='120' min='1' max='999')
-          div
-            a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Toggle Chat
           div.row
             table.table.table-bordered.table-condensed
               tr
@@ -102,6 +102,8 @@ html
                 td.black-key O
                 td L
                 td.black-key P
+          div
+            a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Toggle Chat
 
 
     script(src='vendor/jquery/dist/jquery.min.js')
