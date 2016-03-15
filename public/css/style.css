@@ -21,6 +21,20 @@
   margin: auto 1em;
 }
 
+/* TABLE STYLES*/
+table {
+  text-align: center;
+}
+tr > * {
+  text-align: center;
+}
+
+.black-key {
+  background: black;
+  color: white;
+}
+/* END TABLE STYLES*/
+
 /* TEMP STYLES */
 ul li {
   color: white;
