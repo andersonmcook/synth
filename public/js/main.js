@@ -85,6 +85,9 @@
   // hertz listener
   const hertzText = document.getElementById('hertzText')
   const volumeText = document.getElementById('volumeText')
+
+  // tempo listener
+  const tempo = document.getElementById('tempo')
 // LISTENERS END
 
   // gets wave shape from select options
@@ -222,8 +225,8 @@
   // you need to think about when someone is chatting that this is not triggered
   // keydown press
   function pressKey (event) {
-    console.log('in press key')
-    console.log(event.keyCode)
+    // console.log('in press key')
+    // console.log(event.keyCode)
     let alreadyPressed = false;
     for (let i = 0; i < nodes.length; i++) {
       if (nodes[i].code === event.keyCode) {
@@ -239,9 +242,11 @@
       osc.connect(gain)
       osc.start(0)
       // testing length
+      // const beat = getter(tempo) / 60 / 16
+      const beat = 60 / (getter(tempo) * 4)
       nodes.push({code: event.keyCode, node: osc, length: startNote})
-      const notesToSend = {frequency: frequencyByKey[event.keyCode], shape: getter(shape), notes: nodes}
-      console.log("notes", notesToSend)
+      const notesToSend = {frequency: frequencyByKey[event.keyCode], shape: getter(shape), notes: nodes, beat: beat }
+      // console.log("notes", notesToSend)
       ws.emit('sendNotes', notesToSend)
 
     }
@@ -250,12 +255,18 @@
 
 
   function receiveNotes (notes) {
+    const osc = audio.createOscillator()
+    // osc.type = getter(shape)
+    osc.type = notes.shape
+    // osc.frequency.value = frequencyByKey[event.keyCode]
+    osc.frequency.value = notes.frequency
+    osc.connect(gain)
+    osc.start(0)
+    // const beat = getter(tempo) / 60 / 16
+    osc.stop(audio.currentTime + notes.beat)
+    // console.log(getter(tempo))
+    // osc.stop(notes.)
 
-        const osc = audio.createOscillator()
-      osc.type = getter(shape)
-      osc.frequency.value = frequencyByKey[event.keyCode]
-      osc.connect(gain)
-      osc.start(0)
     // console.log('received notes', notes)
     // const garbage = []
     // for (let i = 0; i < nodes.length; i++) {
@@ -268,6 +279,16 @@
     // for (let i = 0; i < garbage.length; i++) {
     //   nodes.splice(garbage[i], 1)
     // }
+    console.log('received notes', notes)
+    const garbage = []
+    for (let i = 0; i < notes.notes.length; i++) {
+      notes.notes[i].node.stop(0)
+      notes.notes[i].node.disconnect()
+      garbage.push(i)
+    }
+    for (let i = 0; i < garbage.length; i++) {
+      notes.notes.splice(garbage[i], 1)
+    }
   }
 
   function releaseKey (event) {

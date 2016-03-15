@@ -32,20 +32,23 @@ html
           #test
           #kill
           //- #xy
-          div
+          div.input-group
             label(for='slider') Volume
               span#volumeText 0.5
             input#slider(type='range' min='0' max='1' step='.1')
-          div
+          div.input-group
             label(for='hertz') Hertz
               span#hertzText 500
             input#hertz(type='range' min='0' max='1000' step='10')
-          div
+          div.input-group
             select#shape(name='shape')
               option(value='sine') sine
               option(value='square') square
               option(value='sawtooth') sawtooth
               option(value='triangle') triangle
+          div.input-group
+            label(for='tempo') Tempo
+            input#tempo(type='number' name='tempo' value='120')
           div
             a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Toggle Chat
 
