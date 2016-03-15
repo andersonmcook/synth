@@ -10,12 +10,12 @@
   })
 
   ws.on('receiveSound', sound => {
-    console.log(sound)
+    // console.log(sound)
     receiveSound(sound)
   })
 
   ws.on('receiveNotes', notes => {
-    console.log(notes)
+    // console.log(notes)
     receiveNotes(notes)
   })
 
@@ -37,7 +37,7 @@
 
   // adjust volume
   function volume () {
-    console.log('slider', slider.value)
+    // console.log('slider', slider.value)
     gain.gain.value = slider.value
     volumeText.innerHTML = slider.value
   }
@@ -78,9 +78,21 @@
   pageContentWrapper.addEventListener('keyup', releaseKey)
   // document.addEventListener('keyup', releaseKey)
 
-  // shape listener
+  // shape 1 listener
   const shape = document.getElementById('shape')
   shape.addEventListener('change', getter(shape))
+
+  // detune 1 listener
+  const detune1 = document.getElementById('detune1')
+  detune1.addEventListener('change', getter(detune1))
+
+  // detune 2 listener
+  const detune2 = document.getElementById('detune2')
+  detune2.addEventListener('change', getter(detune2))
+
+  // oscillator 2 listener
+  const shape2 = document.getElementById('shape2')
+  shape2.addEventListener('change', getter(shape2))
 
   // hertz listener
   const hertzText = document.getElementById('hertzText')
@@ -100,8 +112,8 @@
   function getter (element) {
     if (element.id === 'tempo') {
       // return element.value
-      console.log('element2', element)
-      return element.value >= element.min && element.value <= element.max ? element.value : element.value = 120
+      // console.log('element2', element)
+      return element.value >= element.min && element.value <= element.max ? element.value : element.value = g120
     }
     return element.value
   }
@@ -136,7 +148,7 @@
   // }
 
   function receiveSound (sound) {
-    console.log('received', sound)
+    // console.log('received', sound)
     gain.connect(audio.destination)
     const osc = audio.createOscillator()
     osc.start()
@@ -243,8 +255,20 @@
       const startNote = new Date()
       const osc = audio.createOscillator()
       const beat = 60 / (getter(tempo) * 4)
+      // test for 2 oscillators
+      const osc2 = audio.createOscillator()
+      osc2.type = getter(shape2)
+      osc2.frequency.value = frequencyByKey[event.keyCode]
+      osc2.detune.value = getter(detune2)
+      osc2.connect(gain)
+      osc2.start(0)
+      osc2.stop(audio.currentTime + beat)
+      // end test
       osc.type = getter(shape)
       osc.frequency.value = frequencyByKey[event.keyCode]
+      osc.detune.value = getter(detune1)
+      // console.log('detune.value', osc.detune.value)
+      // console.log('detune.value', osc2.detune.value)
       osc.connect(gain)
       osc.start(0)
       // HEY MAYBE YOU SHOULD HAVE IT WHERE YOU CAN SELECT THE NOTE LENGTH TOO
@@ -252,7 +276,8 @@
       // testing length
       // const beat = getter(tempo) / 60 / 16
       nodes.push({code: event.keyCode, node: osc, length: startNote})
-      const notesToSend = {frequency: frequencyByKey[event.keyCode], shape: getter(shape), notes: nodes, beat: beat }
+      // const notesToSend = {frequency: frequencyByKey[event.keyCode], shape: getter(shape), notes: nodes, beat: beat }
+      const notesToSend = {frequency: osc.frequency.value, shape1: osc.type, shape2: osc2.type, notes: nodes, beat: beat, detune1: osc.detune.value, detune2: osc2.detune.value}
       // console.log("notes", notesToSend)
       ws.emit('sendNotes', notesToSend)
 
@@ -264,13 +289,28 @@
   function receiveNotes (notes) {
     const osc = audio.createOscillator()
     // osc.type = getter(shape)
-    osc.type = notes.shape
+    osc.type = notes.shape1
     // osc.frequency.value = frequencyByKey[event.keyCode]
     osc.frequency.value = notes.frequency
+    osc.detune.value = notes.detune1
     osc.connect(gain)
-    osc.start(0)
     // const beat = getter(tempo) / 60 / 16
+
+    // second note
+    const osc2 = audio.createOscillator()
+    osc2.type = notes.shape2
+    osc2.frequency.value = notes.frequency
+    osc2.detune.value = notes.detune2
+    osc2.connect(gain)
+    // end second note
+
+    osc.start(0)
+    osc2.start(0)
+
     osc.stop(audio.currentTime + notes.beat)
+    osc2.stop(audio.currentTime + notes.beat)
+
+
     // console.log(getter(tempo))
     // osc.stop(notes.)
 
@@ -299,7 +339,7 @@
   }
 
   function releaseKey (event) {
-    console.log('released key')
+    // console.log('released key')
     const garbage = []
     for (let i = 0; i < nodes.length; i++) {
       if (nodes[i].code === event.keyCode) {
@@ -308,7 +348,7 @@
         // testing end note
         const endNote = new Date()
         nodes[i].length = endNote - nodes[i].length
-        console.log('nodes i dot length', nodes[i].length)
+        // console.log('nodes i dot length', nodes[i].length)
         ws.emit('sendNoteEnd')
         // end testing
         garbage.push(i)
