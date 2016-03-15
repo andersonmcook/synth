@@ -282,15 +282,15 @@
     //   nodes.splice(garbage[i], 1)
     // }
     console.log('received notes', notes)
-    const garbage = []
-    for (let i = 0; i < notes.notes.length; i++) {
-      notes.notes[i].node.stop(0)
-      notes.notes[i].node.disconnect()
-      garbage.push(i)
-    }
-    for (let i = 0; i < garbage.length; i++) {
-      notes.notes.splice(garbage[i], 1)
-    }
+    // const garbage = []
+    // for (let i = 0; i < notes.notes.length; i++) {
+    //   notes.notes[i].node.stop(0)
+    //   notes.notes[i].node.disconnect()
+    //   garbage.push(i)
+    // }
+    // for (let i = 0; i < garbage.length; i++) {
+    //   notes.notes.splice(garbage[i], 1)
+    // }
   }
 
   function releaseKey (event) {
