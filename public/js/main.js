@@ -98,6 +98,11 @@
 
   // a getter that can get lots of things
   function getter (element) {
+    if (element.id === 'tempo') {
+      // return element.value
+      console.log('element2', element)
+      return element.value >= element.min && element.value <= element.max ? element.value : element.value = 120
+    }
     return element.value
   }
 
