@@ -30,10 +30,13 @@
   }
 
   // default
-  const audio = new AudioContext()
+  // const audio = new AudioContext()
+  const audio = new (window.AudioContext || window.webkitAudioContext)()
   const gain = audio.createGain()
+  const analyser = audio.createAnalyser()
   gain.gain.value = 0.5;
   gain.connect(audio.destination)
+  // audio.connect(analyser)
 
   // adjust volume
   function volume () {
@@ -44,8 +47,8 @@
 
   // display values
   function updateDisplay (element, control) {
-    console.log(element, control)
-    console.log('in updateDisplay')
+    // console.log(element, control)
+    // console.log('in updateDisplay')
     element.innerHTML = control.value
   }
 
@@ -53,6 +56,71 @@
 
 // TEST
 
+
+
+// the problem right now is that the bars aren't going down after a certain time
+// also i'd like the notes to be spaced out more
+// ANALYZER TEST
+var canvas = document.querySelector('canvas');
+var canvasWidth = canvas.width = window.innerWidth - 40;
+var canvasHeight = canvas.height = 300;
+var ctx = canvas.getContext('2d');
+
+// var analyzer = synth.audio.createAnalyser();
+var analyzer = audio.createAnalyser()
+// synth.output.connect(  analyzer );
+gain.connect(analyzer)
+
+analyzer.minDecibels = -90;
+analyzer.maxDecibels = -10;
+analyzer.smoothingTimeConstant = 0.85;
+
+// analyzer.fftSize = 512;
+analyzer.fftSize = 2048
+var bufferLength = analyzer.frequencyBinCount;
+var dataArray = new Uint8Array( bufferLength );
+
+
+ctx.fillStyle = 'white';
+ctx.fillRect( 0, 0, canvasWidth, canvasHeight );
+
+function render() {
+  analyzer.getByteFrequencyData( dataArray );
+
+  // shift down
+  var canvasImageData = ctx.getImageData( 0, 0, canvasWidth, canvasHeight );
+  ctx.putImageData( canvasImageData, 0, 6 );
+
+  ctx.fillStyle = 'black';
+  ctx.fillRect( 0, 0, canvasWidth, canvasHeight );
+
+  var barWidth = Math.ceil( canvasWidth / bufferLength * 16);
+
+  for ( var i = 0; i < bufferLength; i++ ) {
+    var x = Math.floor( i * barWidth);
+    // var x = Math.floor (i * barWidth * 2)
+    var amp = dataArray[i] / 200; // should be 256
+    // var amp = dataArray[i] / 256
+    var hue = Math.round( amp * 210 + 210 );
+    var sat = 50 + ( 1- amp) * 50;
+    var alpha = amp
+    ctx.fillStyle = 'hsla(' + hue + ', 100%, ' + 50 + '%, ' + 1 + ')';
+    var barHeight = amp * canvasHeight;
+    var y = canvasHeight - barHeight;
+    ctx.fillRect( x, y, barWidth, barHeight );
+  }
+
+  requestAnimationFrame( render );
+}
+
+render();
+
+
+
+
+
+
+// END ANALYZER TEST
 
 
 // LISTENERS
@@ -125,7 +193,7 @@
     osc.type = sound.shape
     osc.frequency.value = sound.frequency
     osc.connect(gain);
-    hertzText.innerHTML = sound.frequency
+    // hertzText.innerHTML = sound.frequency
   }
 
 // END TEST
