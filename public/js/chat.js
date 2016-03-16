@@ -32,6 +32,7 @@
       const li = generateLI(chat)
       li.classList.add("chats", "list-group-item")
       ul.appendChild(li)
+      // $(ul).prepend(li)
     // }
   }
 

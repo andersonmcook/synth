@@ -6,21 +6,21 @@ html
   body
     div#wrapper
       div#sidebar-wrapper
-        form#chat-form
-          .form-group
-            .input-group
-              span(class="input-group-addon" id="name-symbol" aria-hidden="true") U
-              input#chat-name(type='text' name='name' placeholder='Name' class='form-control' aria-describedby='name-symbol')
-            .input-group
-              span(class="input-group-addon" id="text-symbol" aria-hidden="true") C
-              input#chat-text(type='text' name='text' placeholder='Chat Text' class='form-control' aria-describedby='text-symbol')
-            input(type='submit')
         ul.sidebar-nav
           li
             a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Close
+          form#chat-form.row
+            .form-group
+              .input-group
+                span(class="input-group-addon" id="name-symbol" aria-hidden="true") U
+                input#chat-name(type='text' name='name' placeholder='Name' class='form-control' aria-describedby='name-symbol')
+              .input-group
+                span(class="input-group-addon" id="text-symbol" aria-hidden="true") C
+                input#chat-text(type='text' name='text' placeholder='Chat Text' class='form-control' aria-describedby='text-symbol')
+              input(type='submit')
           li.sidebar-brand CHAT
-
-          ul#chat-list.list-group
+          div
+            ul#chat-list.list-group
             //- li.chats.list-group-item Anderson: a sample chat
 
 
