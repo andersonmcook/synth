@@ -29,7 +29,8 @@
   function displayChat (chat) {
       const li = generateLI(chat)
       li.classList.add("chats", "list-group-item")
-      ul.appendChild(li)
+      // ul.appendChild(li)
+      $(ul).prepend(li)
   }
 
 // generate list item

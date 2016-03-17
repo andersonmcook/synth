@@ -168,6 +168,7 @@ render();
   // a getter that can get lots of things
   function getter (element) {
     if (element.id === 'tempo') {
+      // makes sure you can't get a NaN from the user inputting an invalid tempo
       return element.value >= element.min && element.value <= element.max ? element.value : element.value = 120
     }
     return element.value
@@ -270,7 +271,6 @@ render();
     }
   }
 
-
 //receive a note from another socket and play it
   function receiveNotes (notes) {
     const osc = audio.createOscillator()
@@ -295,26 +295,26 @@ render();
     osc2.stop(audio.currentTime + notes.beat)
   }
 
-  // function releaseKey (event) {
-  //   // console.log('released key')
-  //   const garbage = []
-  //   for (let i = 0; i < nodes.length; i++) {
-  //     if (nodes[i].code === event.keyCode) {
-  //       nodes[i].node.stop(0)
-  //       nodes[i].node.disconnect()
-  //       // testing end note
-  //       const endNote = new Date()
-  //       nodes[i].length = endNote - nodes[i].length
-  //       // console.log('nodes i dot length', nodes[i].length)
-  //       ws.emit('sendNoteEnd')
-  //       // end testing
-  //       garbage.push(i)
-  //     }
-  //   }
-  //   for (let i = 0; i < garbage.length; i++) {
-  //     nodes.splice(garbage[i], 1)
-  //   }
-  // }
+  function releaseKey (event) {
+    // console.log('released key')
+    const garbage = []
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].code === event.keyCode) {
+        nodes[i].node.stop(0)
+        nodes[i].node.disconnect()
+        // testing end note
+        const endNote = new Date()
+        nodes[i].length = endNote - nodes[i].length
+        // console.log('nodes i dot length', nodes[i].length)
+        ws.emit('sendNoteEnd')
+        // end testing
+        garbage.push(i)
+      }
+    }
+    for (let i = 0; i < garbage.length; i++) {
+      nodes.splice(garbage[i], 1)
+    }
+  }
 
 
 
