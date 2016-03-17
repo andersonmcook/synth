@@ -25,15 +25,11 @@
     event.preventDefault()
   })
 
-// display chat on page, but not if it already exists on client side
-// should probably use local storage instead of dom
+// display chat on page
   function displayChat (chat) {
-    // if (!document.querySelector(`[data-id="${chat._id}"`)) {
       const li = generateLI(chat)
       li.classList.add("chats", "list-group-item")
       ul.appendChild(li)
-      // $(ul).prepend(li)
-    // }
   }
 
 // generate list item
@@ -41,9 +37,6 @@
     const li = document.createElement('li')
     const textNode = document.createTextNode(`${chat.name}: ${chat.text}
       (${getTime()})`)
-    // const dataId = document.createAttribute('data-id')
-    // dataId.value = chat._id
-    // li.setAttributeNode(dataId)
     li.appendChild(textNode)
     return li
   }
@@ -53,15 +46,5 @@
     const now = new Date()
     return `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
   }
-
-// get JSON from POSTGRES
-  // function getJSON (url, cb) {
-  //   const request = new XMLHttpRequest()
-  //   request.open('GET', url)
-  //   request.onload = () => {
-  //     cb(JSON.parse(request.responseText))
-  //   }
-  //   request.send()
-  // }
 
 })();
