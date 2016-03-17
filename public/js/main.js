@@ -60,15 +60,16 @@
 
 // the problem right now is that the bars aren't going down after a certain time
 // also i'd like the notes to be spaced out more
+// the canvas will disappear when i go to a new program
 // ANALYZER TEST
 var canvas = document.querySelector('canvas');
 var canvasWidth = canvas.width = window.innerWidth - 40;
 var canvasHeight = canvas.height = 300;
 var ctx = canvas.getContext('2d');
 
-// var analyzer = synth.audio.createAnalyser();
+// commented out for a second
 var analyzer = audio.createAnalyser()
-// synth.output.connect(  analyzer );
+
 gain.connect(analyzer)
 
 analyzer.minDecibels = -90;
@@ -253,6 +254,16 @@ render();
       }
     }
     if (event.keyCode >= 65 && event.keyCode <= 90 && !alreadyPressed) {
+
+      // context test
+      // const audio = new (window.AudioContext || window.webkitAudioContext)()
+      // const gain = audio.createGain()
+      // const analyser = audio.createAnalyser()
+      // gain.gain.value = 0.5;
+      // gain.connect(audio.destination)
+      // end context test
+
+
       const startNote = new Date()
       const osc = audio.createOscillator()
       const beat = 60 / (getter(tempo) * 4)
@@ -261,6 +272,9 @@ render();
       osc2.type = getter(shape2)
       osc2.frequency.value = frequencyByKey[event.keyCode]
       osc2.detune.value = getter(detune2)
+      // gain.gain.linearRampToValueAtTime(1, audio.currentTime + beat)
+      // gain.gain.value = 0.5
+      // gain.gain.linearRampToValueAtTime(0, audio.currentTime + 10)
       osc2.connect(gain)
       osc2.start(0)
       osc2.stop(audio.currentTime + beat)
