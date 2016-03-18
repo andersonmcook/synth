@@ -23,10 +23,10 @@ app.get('/', (req, res) => {
 
 // use req.params to create a new room
 app.get('/:room', (req, res) => {
-  // console.log('the room someone is in:', req.params.room)
   res.render('synth', {room: req.params.room})
 })
 
+// listen
 server.listen(PORT, () => {
   console.log(`Listening on Port: ${PORT}`)
 })
@@ -35,27 +35,18 @@ server.listen(PORT, () => {
 ws.on('connection', socket => {
   console.log('server socket connected', socket.id)
 
-// ROOM TEST
-
+// socket join a room based on front end emission
   socket.on('room', room => {
     socket.join(room);
-    // console.log('server in room: ', room)
   })
-
-// END ROOM TEST
 
 // passes around notes
   socket.on('sendNotes', (room, notes) => {
-    // console.log('server room', room)
-    // console.log('server notes', notes)
     socket.broadcast.to(room).emit('receiveNotes', notes)
   })
 
 // passes around chats
   socket.on('sendChat', (room, msg) => {
-    // console.log('server room', room)
-    // console.log('server msg', msg)
-    // socket.broadcast.emit('receiveChat', [msg])
     socket.broadcast.to(room).emit('receiveChat', [msg])
   })
 })

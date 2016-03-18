@@ -5,22 +5,12 @@
 // SOCKETS
   const ws = io.connect()
 
-  // ws.on('connect', () => {
-  //   console.log('browser socket connected')
-  // })
-
-// ROOM TEST
+// ROOM
   const room  = $('body').attr('data-room')
   ws.on('connect', () => {
-    // console.log('room', room)
     ws.emit('room', room)
   })
-// END ROOM TEST
-
-// // receive sound from server and make it
-//   ws.on('receiveSound', sound => {
-//     receiveSound(sound)
-//   })
+// END ROOM
 
 // receive note from server and display it
   ws.on('receiveNotes', notes => {
@@ -55,16 +45,21 @@
     element.innerHTML = control.value
   }
 
+  // a getter that can get lots of things
+  function getter (element) {
+    if (element.id === 'tempo') {
+      // makes sure you can't get a NaN from the user inputting an invalid tempo
+      return element.value >= element.min && element.value <= element.max ? element.value : element.value = 120
+    }
+    return element.value
+  }
+
 // END AUDIO CONTEXT
-
-// TEST
-
-
 
 // the problem right now is that the bars aren't going down after a certain time
 // also i'd like the notes to be spaced out more
 // the canvas will sometimes disappear when i go to a new program
-// ANALYZER TEST
+// ANALYZER
 var canvas = document.querySelector('canvas');
 var canvasWidth = canvas.width = window.innerWidth - 40;
 var canvasHeight = canvas.height = 300;
@@ -118,23 +113,19 @@ function render() {
 
 render();
 
-
-
-
-
-
-// END ANALYZER TEST
+// END ANALYZER
 
 
 // LISTENERS
 
   // label spans
-  const hertzText = document.getElementById('hertzText')
+  // const hertzText = document.getElementById('hertzText')
   const volumeText = document.getElementById('volumeText')
   const osc1detune = document.getElementById('osc1detune')
   const osc2detune = document.getElementById('osc2detune')
   const slider = document.getElementById('slider')
 
+  // volume
   slider.addEventListener('input', volume)
 
   // should only listen when this div has focus so typing in chat doesn't trigger sounds
@@ -170,29 +161,6 @@ render();
   // tempo listener
   const tempo = document.getElementById('tempo')
 // LISTENERS END
-
-
-
-  // a getter that can get lots of things
-  function getter (element) {
-    if (element.id === 'tempo') {
-      // makes sure you can't get a NaN from the user inputting an invalid tempo
-      return element.value >= element.min && element.value <= element.max ? element.value : element.value = 120
-    }
-    return element.value
-  }
-
-// // receive sound from another socket
-//   function receiveSound (sound) {
-//     gain.connect(audio.destination)
-//     const osc = audio.createOscillator()
-//     osc.start()
-//     osc.type = sound.shape
-//     osc.frequency.value = sound.frequency
-//     osc.connect(gain);
-//   }
-
-// END TEST
 
 // KEYS
 

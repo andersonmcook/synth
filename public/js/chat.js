@@ -3,22 +3,17 @@
 
   const ws = io.connect()
 
-  // ROOM TEST
+  // ROOM
   const room  = $('body').attr('data-room')
   ws.on('connect', () => {
-    // console.log('room', room)
     ws.emit('room', room)
   })
-  // END ROOM TEST
+  // END ROOM
 
-  // ws.on('connect', () => {
-  //   console.log('receiveChat socket connected')
-  // })
-
+// receive chats from server and display them
   ws.on('receiveChat', msgs => {
     msgs.forEach(displayChat)
   })
-
 
   const form = document.querySelector('#chat-form')
   const name = document.querySelector('#chat-name')
