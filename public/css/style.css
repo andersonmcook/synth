@@ -94,6 +94,11 @@ input[type="range"] {
   border-radius: 0;
   text-indent: 0;
 }
+
+/* color for pressed key*/
+.highlight {
+  background: gold;
+}
 /* END TEMP STYLES */
 
 /* BOOTSTRAP */

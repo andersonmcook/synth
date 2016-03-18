@@ -276,6 +276,8 @@ render();
       const notesToSend = {frequency: osc.frequency.value, shape1: osc.type, shape2: osc2.type, notes: nodes, beat: beat, detune1: osc.detune.value, detune2: osc2.detune.value}
       // send object over websockets to server
       ws.emit('sendNotes', room, notesToSend)
+      // show key that you pressed
+      $(`#key${event.keyCode}`).toggleClass('highlight')
     }
   }
 
@@ -316,6 +318,8 @@ render();
         // console.log('nodes i dot length', nodes[i].length)
         ws.emit('sendNoteEnd')
         // end testing
+        // show key that you pressed
+        $(`#key${event.keyCode}`).toggleClass('highlight')
         garbage.push(i)
       }
     }
