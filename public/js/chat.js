@@ -3,13 +3,22 @@
 
   const ws = io.connect()
 
+  // ROOM TEST
+  const room  = $('body').attr('data-room')
   ws.on('connect', () => {
-    console.log('receiveChat socket connected')
+    // console.log('room', room)
+    ws.emit('room', room)
   })
+  // END ROOM TEST
+
+  // ws.on('connect', () => {
+  //   console.log('receiveChat socket connected')
+  // })
 
   ws.on('receiveChat', msgs => {
     msgs.forEach(displayChat)
   })
+
 
   const form = document.querySelector('#chat-form')
   const name = document.querySelector('#chat-name')
@@ -19,7 +28,7 @@
 // listen for submit, run displayChat, reset text value, prevent page reload
   form.addEventListener('submit', () => {
     const chat = {name: name.value, text: text.value}
-    ws.emit('sendChat', chat) // before because displayChat resets text.value
+    ws.emit('sendChat', room, chat) // before because displayChat resets text.value
     displayChat(chat)
     text.value = ''
     event.preventDefault()

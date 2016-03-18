@@ -16,32 +16,55 @@ app.locals.options = {
   users: 0
 }
 
+// get home
 app.get('/', (req, res) => {
   res.render('synth')
+})
+
+// use req.params to create a new room
+app.get('/:room', (req, res) => {
+  // console.log('the room someone is in:', req.params.room)
+  res.render('synth', {room: req.params.room})
 })
 
 server.listen(PORT, () => {
   console.log(`Listening on Port: ${PORT}`)
 })
 
+// WEB SOCKETS
 ws.on('connection', socket => {
   console.log('server socket connected', socket.id)
 
+// ROOM TEST
 
-// passes around sounds
-  socket.on('sendSound', sound => {
-    console.log('sound', sound)
-    socket.broadcast.emit('receiveSound', sound)
+  socket.on('room', room => {
+    socket.join(room);
+    // console.log('server in room: ', room)
   })
 
-  socket.on('sendNotes', notes => {
-    socket.broadcast.emit('receiveNotes', notes)
+// END ROOM TEST
+
+
+
+// passes around sounds
+  // socket.on('sendSound', sound => {
+  //   console.log('sound', sound)
+  //   socket.broadcast.emit('receiveSound', sound)
+  // })
+
+// passes around notes
+  socket.on('sendNotes', (room, notes) => {
+    // console.log('server room', room)
+    // console.log('server notes', notes)
+    socket.broadcast.to(room).emit('receiveNotes', notes)
   })
 
 // passes around chats
-  socket.on('sendChat', msg => {
-    console.log('msg', msg)
-    socket.broadcast.emit('receiveChat', [msg])
+  socket.on('sendChat', (room, msg) => {
+    // console.log('server room', room)
+    // console.log('server msg', msg)
+    // socket.broadcast.emit('receiveChat', [msg])
+    socket.broadcast.to(room).emit('receiveChat', [msg])
   })
 
   // socket.on('connect', socket => {

@@ -5,9 +5,17 @@
 // SOCKETS
   const ws = io.connect()
 
+  // ws.on('connect', () => {
+  //   console.log('browser socket connected')
+  // })
+
+// ROOM TEST
+  const room  = $('body').attr('data-room')
   ws.on('connect', () => {
-    console.log('browser socket connected')
+    // console.log('room', room)
+    ws.emit('room', room)
   })
+// END ROOM TEST
 
 // receive sound from server and make it
   ws.on('receiveSound', sound => {
@@ -267,7 +275,7 @@ render();
       // create object to send over websockets
       const notesToSend = {frequency: osc.frequency.value, shape1: osc.type, shape2: osc2.type, notes: nodes, beat: beat, detune1: osc.detune.value, detune2: osc2.detune.value}
       // send object over websockets to server
-      ws.emit('sendNotes', notesToSend)
+      ws.emit('sendNotes', room, notesToSend)
     }
   }
 
