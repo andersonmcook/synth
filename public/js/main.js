@@ -17,10 +17,10 @@
   })
 // END ROOM TEST
 
-// receive sound from server and make it
-  ws.on('receiveSound', sound => {
-    receiveSound(sound)
-  })
+// // receive sound from server and make it
+//   ws.on('receiveSound', sound => {
+//     receiveSound(sound)
+//   })
 
 // receive note from server and display it
   ws.on('receiveNotes', notes => {
@@ -182,15 +182,15 @@ render();
     return element.value
   }
 
-// receive sound from another socket
-  function receiveSound (sound) {
-    gain.connect(audio.destination)
-    const osc = audio.createOscillator()
-    osc.start()
-    osc.type = sound.shape
-    osc.frequency.value = sound.frequency
-    osc.connect(gain);
-  }
+// // receive sound from another socket
+//   function receiveSound (sound) {
+//     gain.connect(audio.destination)
+//     const osc = audio.createOscillator()
+//     osc.start()
+//     osc.type = sound.shape
+//     osc.frequency.value = sound.frequency
+//     osc.connect(gain);
+//   }
 
 // END TEST
 

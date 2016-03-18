@@ -44,14 +44,6 @@ ws.on('connection', socket => {
 
 // END ROOM TEST
 
-
-
-// passes around sounds
-  // socket.on('sendSound', sound => {
-  //   console.log('sound', sound)
-  //   socket.broadcast.emit('receiveSound', sound)
-  // })
-
 // passes around notes
   socket.on('sendNotes', (room, notes) => {
     // console.log('server room', room)
@@ -66,18 +58,6 @@ ws.on('connection', socket => {
     // socket.broadcast.emit('receiveChat', [msg])
     socket.broadcast.to(room).emit('receiveChat', [msg])
   })
-
-  // socket.on('connect', socket => {
-  //   console.log("before ++", app.locals.options.users);
-  //   app.locals.options.users++
-  //   console.log("after ++", app.locals.options.users);
-  // })
-
-  // socket.on('disconnect', socket => {
-  //   console.log('socket disconnected', socket)
-  //   console.log("before --", app.locals.options.users);
-  //   app.locals.options.users--
-  //   console.log("after --", app.locals.options.users);
-  // })
 })
+// END WEB SOCKETS
 
