@@ -21,27 +21,17 @@ html
           li.sidebar-brand CHAT
           div
             ul#chat-list.list-group
-            //- li.chats.list-group-item Anderson: a sample chat
 
 
       div#page-content-wrapper(tabindex='0')
         div.container-fluid
           canvas#canvas
           h1= options.title
-          //- span= options.users
 
-
-          //- #test
-          //- #kill
-          //- #xy
           div.input-group
             label(for='slider') Volume
               span#volumeText.updatable-value 0.5
             input#slider(type='range' min='0' max='1' step='.1')
-          //- div.input-group
-          //-   label(for='hertz') Hertz
-          //-     span#hertzText 500
-          //-   input#hertz(type='range' min='0' max='1000' step='10')
           div.input-group
             label(for='shape') Oscillator 1
             select#shape.form-control(name='shape')

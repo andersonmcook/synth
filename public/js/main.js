@@ -13,10 +13,7 @@
 // END ROOM
 
 // receive note from server and display it
-  ws.on('receiveNotes', notes => {
-    receiveNotes(notes)
-  })
-
+  ws.on('receiveNotes', receiveNotes)
 // END SOCKETS
 
 // AUDIO CONTEXT
@@ -40,12 +37,12 @@
     volumeText.innerHTML = slider.value
   }
 
-  // display values
+  // generic display values
   function updateDisplay (element, control) {
     element.innerHTML = control.value
   }
 
-  // a getter that can get lots of things
+  // generic getter
   function getter (element) {
     if (element.id === 'tempo') {
       // makes sure you can't get a NaN from the user inputting an invalid tempo
@@ -204,8 +201,7 @@ render();
 
   let nodes = [];
 
-  // you need to think about when someone is chatting that this is not triggered
-  // keydown press
+  // keydown press make sound
   function pressKey (event) {
     // THINK ABOUT DOING AN INSTRUMENT PROTOTYPE INSTEAD
     let alreadyPressed = false;
@@ -273,6 +269,7 @@ render();
     osc2.stop(audio.currentTime + notes.beat)
   }
 
+// release key, currently really only toggling class as the pressKey function sets the length of note
   function releaseKey (event) {
     // console.log('released key')
     const garbage = []

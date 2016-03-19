@@ -23,7 +23,7 @@
 // listen for submit, run displayChat, reset text value, prevent page reload
   form.addEventListener('submit', () => {
     const chat = {name: name.value, text: text.value}
-    ws.emit('sendChat', room, chat) // before because displayChat resets text.value
+    ws.emit('sendChat', room, chat)
     displayChat(chat)
     text.value = ''
     event.preventDefault()
@@ -33,7 +33,6 @@
   function displayChat (chat) {
       const li = generateLI(chat)
       li.classList.add("chats", "list-group-item")
-      // ul.appendChild(li)
       $(ul).prepend(li)
   }
 
