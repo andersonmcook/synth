@@ -235,7 +235,7 @@ render();
       osc.stop(audio.currentTime + beat)
       osc2.stop(audio.currentTime + beat)
       // HEY MAYBE YOU SHOULD HAVE IT WHERE YOU CAN SELECT THE NOTE LENGTH TOO
-      nodes.push({code: event.keyCode, node: osc, length: startNote})
+      nodes.push({code: event.keyCode, node: osc})
       // create object to send over websockets
       const notesToSend = {frequency: osc.frequency.value, shape1: osc.type, shape2: osc2.type, notes: nodes, beat: beat, detune1: osc.detune.value, detune2: osc2.detune.value}
       // send object over websockets to server
@@ -275,13 +275,13 @@ render();
     const garbage = []
     for (let i = 0; i < nodes.length; i++) {
       if (nodes[i].code === event.keyCode) {
-        nodes[i].node.stop(0)
-        nodes[i].node.disconnect()
+        // nodes[i].node.stop(0)
+        // nodes[i].node.disconnect()
         // testing end note
-        const endNote = new Date()
-        nodes[i].length = endNote - nodes[i].length
+        // const endNote = new Date()
+        // nodes[i].length = endNote - nodes[i].length
         // console.log('nodes i dot length', nodes[i].length)
-        ws.emit('sendNoteEnd')
+        // ws.emit('sendNoteEnd')
         // end testing
         // show key that you pressed
         $(`#key${event.keyCode}`).toggleClass('highlight')
