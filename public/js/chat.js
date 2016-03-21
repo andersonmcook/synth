@@ -23,9 +23,12 @@
 // listen for submit, run displayChat, reset text value, prevent page reload
   form.addEventListener('submit', () => {
     const chat = {name: name.value, text: text.value}
-    ws.emit('sendChat', room, chat)
-    displayChat(chat)
-    text.value = ''
+    if (text.value !== '') {
+      ws.emit('sendChat', room, chat)
+      displayChat(chat)
+      text.value = ''
+      event.preventDefault()
+    }
     event.preventDefault()
   })
 
