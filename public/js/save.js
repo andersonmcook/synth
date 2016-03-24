@@ -3,10 +3,15 @@
     'use strict'
     console.log('in save.js')
 
+// load history
     let history = JSON.parse(localStorage.getItem("synth-sockets-presets"))
-    console.log(history)
+    // console.log(history)
 
-    $.each()
+// put history into presets select
+    $.each(history, function (key, value) {
+      console.log('key', key, 'value', value)
+      $('#presets').append($('<option />').val(key).text(key))
+    })
 
 // save presets to local storage
     function savePreset (event) {
@@ -22,6 +27,7 @@
           tempo: $('#tempo').val()
         }
         localStorage.setItem('synth-sockets-presets', JSON.stringify(history))
+        $('#presets').append($('<option />').val(name).text(name))
       }
       console.log('saved preset')
     }
@@ -36,7 +42,7 @@
       $('#detune2').val(preset.detune2)
       $('#osc2detune').text(preset.detune2)
       $('#tempo').val(preset.tempo)
-      console.log('preset', preset)
+      // console.log('preset', preset)
     }
 
 // save presets click handler
