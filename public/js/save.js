@@ -25,8 +25,8 @@
           tempo: $('#tempo').val()
         }
         localStorage.setItem('synth-sockets-presets', JSON.stringify(history))
-        // $('#presets').append($('<option />').val(name).text(name))
-        history = history
+        $('#presets').append($('<option />').val(name).text(name))
+        // history = history
       // }
       $('#new-preset').val('')
       // console.log('saved preset')
