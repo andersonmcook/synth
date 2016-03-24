@@ -58,7 +58,8 @@
 // the canvas will sometimes disappear when i go to a new program
 // ANALYZER
 var canvas = document.querySelector('canvas');
-var canvasWidth = canvas.width = window.innerWidth - 40;
+// var canvasWidth = canvas.width = window.innerWidth - 40;
+var canvasWidth = canvas.width = window.innerWidth - 70;
 var canvasHeight = canvas.height = 300;
 var ctx = canvas.getContext('2d');
 
@@ -154,9 +155,23 @@ render();
   const shape2 = document.getElementById('shape2')
   shape2.addEventListener('change', getter(shape2))
 
-
   // tempo listener
   const tempo = document.getElementById('tempo')
+
+  $(document).ready(function () {
+    $('#page-content-wrapper').focus()
+  })
+
+  $('#shape').change(function () {
+    $('#page-content-wrapper').focus()
+  })
+
+   $('#shape2').change(function () {
+    $('#page-content-wrapper').focus()
+  })
+
+
+
 // LISTENERS END
 
 // KEYS

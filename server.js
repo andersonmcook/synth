@@ -12,7 +12,7 @@ app.set('view engine', 'jade')
 app.use(express.static('public'))
 
 app.locals.options = {
-  title: "synth",
+  title: "Synth Sockets",
   users: 0
 }
 

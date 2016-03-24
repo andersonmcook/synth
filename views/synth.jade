@@ -26,7 +26,10 @@ html
       div#page-content-wrapper(tabindex='0')
         div.container-fluid
           canvas#canvas
-          h1= options.title
+          if room
+            h1 #{options.title} in "#{room}"
+          else
+            h1= options.title
 
           div.input-group
             label(for='slider') Volume
@@ -94,18 +97,16 @@ html
                 td#key76 L
                 td#key80.black-key P
           div.row
-            .col-sm-2
+            .col-sm-3
               a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Toggle Chat
-            .col-sm-2
-              //- label(for='presets') Presets
+            .col-sm-3
               select#presets.form-control(name='presets')
                 option(disabled='disabled' selected='selected' hidden='hidden') Presets
             .col-sm-6
-              form.form-group
-                .input-group
-                  label(for='new-preset') New Preset
+              form.form-inline
+                .form-group
                   input#new-preset.form-control(type='text', name='new-preset', required)
-                  input#save-preset(type='submit', value='Save')
+                  input#save-preset.btn.btn-default(type='submit', value='Save Preset')
 
 
     script(src='vendor/jquery/dist/jquery.min.js')

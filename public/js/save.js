@@ -16,7 +16,7 @@
       event.preventDefault()
       // history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {}
       const name = $('#new-preset').val()
-      if (history.hasOwnProperty(name) === false) {
+      // if (history.hasOwnProperty(name) === false) {
         history[name] = {
           shape: $('#shape').val(),
           shape2: $('#shape2').val(),
@@ -25,9 +25,9 @@
           tempo: $('#tempo').val()
         }
         localStorage.setItem('synth-sockets-presets', JSON.stringify(history))
-        $('#presets').append($('<option />').val(name).text(name))
+        // $('#presets').append($('<option />').val(name).text(name))
         history = history
-      }
+      // }
       $('#new-preset').val('')
       // console.log('saved preset')
     }
