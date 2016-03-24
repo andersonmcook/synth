@@ -28,7 +28,7 @@
   const audio = new (window.AudioContext || window.webkitAudioContext)()
   const gain = audio.createGain()
   const analyser = audio.createAnalyser()
-  gain.gain.value = 0.5;
+  gain.gain.value = 0.1;
   gain.connect(audio.destination)
 
   // adjust volume
