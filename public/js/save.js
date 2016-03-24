@@ -9,14 +9,15 @@
 
 // put history into presets select
     $.each(history, function (key, value) {
-      console.log('key', key, 'value', value)
+      // console.log('key', key, 'value', value)
       $('#presets').append($('<option />').val(key).text(key))
     })
 
 // save presets to local storage
     function savePreset (event) {
       event.preventDefault()
-      const history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {};
+      // const history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {}
+      history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {}
       const name = $('#new-preset').val()
       if (history.hasOwnProperty(name) === false) {
         history[name] = {
@@ -28,7 +29,9 @@
         }
         localStorage.setItem('synth-sockets-presets', JSON.stringify(history))
         $('#presets').append($('<option />').val(name).text(name))
+        history = history
       }
+      $('#new-preset').val('')
       console.log('saved preset')
     }
 
@@ -43,7 +46,14 @@
       $('#osc2detune').text(preset.detune2)
       $('#tempo').val(preset.tempo)
       // console.log('preset', preset)
+      $('#page-content-wrapper').focus()
     }
+
+// stop listening to typing in #new-preset
+    $('#new-preset').focus(function (event) {
+      console.log('new preset has focus')
+      event.stopPropagation()
+    })
 
 // save presets click handler
     $('#save-preset').click(function () {
