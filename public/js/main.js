@@ -1,6 +1,6 @@
 ;(function () {
   'use strict'
-  console.log('in main.js')
+  // console.log('in main.js')
 
 // SOCKETS
   const ws = io.connect()

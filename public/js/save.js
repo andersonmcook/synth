@@ -1,7 +1,6 @@
 ;(function () {
   $(document).ready(function() {
     'use strict'
-    console.log('in save.js')
 
 // load history
     let history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {}
@@ -51,8 +50,18 @@
       event.stopPropagation()
     })
 
+// stop listening to typing, but also check to see if the new preset is named the same as a previous one
     $('#new-preset').keyup(function (event) {
       event.stopPropagation()
+      const array = $('#presets').children()
+      for (let i = 0; i < array.length; i++) {
+        if ($('#new-preset').val() === array[i].innerText) {
+          $('#save-preset').val('Overwrite')
+          break
+        } else {
+          $('#save-preset').val('Save Preset')
+        }
+      }
     })
 
 // save presets click handler
@@ -64,7 +73,5 @@
     $('#presets').change(function () {
       loadPreset()
     })
-
-
   })
 })();
