@@ -17,7 +17,7 @@ html
               .input-group
                 span(class="input-group-addon" id="text-symbol" aria-hidden="true") C
                 input#chat-text(type='text' name='text' placeholder='Chat Text' class='form-control' aria-describedby='text-symbol')
-              input(type='submit')
+              input#chat-submit(type='submit')
           li.sidebar-brand CHAT
           div
             ul#chat-list.list-group
@@ -45,7 +45,7 @@ html
             input#detune1(type='range' min='-1200' max='1200')
           div.input-group
             label(for='shape2') Oscillator 2
-            select#shape2.form-control(name='shape')
+            select#shape2.form-control(name='shape2')
               option(value='sine') sine
               option(value='square') square
               option(value='sawtooth') sawtooth
@@ -93,8 +93,21 @@ html
                 td#key79.black-key O
                 td#key76 L
                 td#key80.black-key P
-          div
-            a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Toggle Chat
+          div.row
+            .col-sm-2
+              a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Toggle Chat
+            .col-sm-2
+              //- label(for='presets') Presets
+              select#presets.form-control(name='presets')
+                option(disabled='disabled' selected='selected' hidden='hidden') Presets
+                option test1
+                option test2
+            .col-sm-6
+              form.form-group
+                .input-group
+                  label(for='new-option') New
+                  input#new-preset(type='text', name='new-preset', required)
+                  input#save-preset(type='submit', value='Save')
 
 
     script(src='vendor/jquery/dist/jquery.min.js')
@@ -103,3 +116,4 @@ html
     script(src='js/display.js')
     script(src='js/main.js')
     script(src='js/chat.js')
+    script(src='js/save.js')
