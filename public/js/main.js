@@ -212,6 +212,15 @@ render();
       }
     }
     if (event.keyCode >= 65 && event.keyCode <= 90 && !alreadyPressed) {
+      // distortion test
+      var distortion = audio.createWaveShaper();
+      distortion.curve = makeDistortionCurve(400);
+      distortion.oversample = '4x';
+      distortion.connect(gain)
+      //
+      // delay test
+      const synthDelay = audio.createDelay(2.0)
+      //
       const startNote = new Date()
       const osc = audio.createOscillator()
       const osc2 = audio.createOscillator()
@@ -228,6 +237,11 @@ render();
       // connect to gain
       osc.connect(gain)
       osc2.connect(gain)
+
+      // connect to delay
+      osc.connect(synthDelay)
+      //
+
       // start note
       osc.start(0)
       osc2.start(0)
@@ -292,12 +306,27 @@ render();
       nodes.splice(garbage[i], 1)
     }
   }
-
-
-
-
-
 // END KEYS
 
+// DISTORTION
+// var distortion = audio.createWaveShaper();
+
+function makeDistortionCurve(amount) {
+  var k = typeof amount === 'number' ? amount : 50,
+    n_samples = 44100,
+    curve = new Float32Array(n_samples),
+    deg = Math.PI / 180,
+    i = 0,
+    x;
+  for ( ; i < n_samples; ++i ) {
+    x = i * 2 / n_samples - 1;
+    curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+  }
+  return curve;
+};
+
+// distortion.curve = makeDistortionCurve(400);
+// distortion.oversample = '4x';
+// END DISTORTION
 
 })();
