@@ -33,7 +33,11 @@ ul li {
   color: white;
 }
 
-input[type="submit"] {
+/*input[type="submit"] {
+  display: none;
+}*/
+
+#chat-submit {
   display: none;
 }
 

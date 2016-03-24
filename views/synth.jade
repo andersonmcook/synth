@@ -16,8 +16,8 @@ html
                 input#chat-name(type='text' name='name' placeholder='Name' class='form-control' aria-describedby='name-symbol')
               .input-group
                 span(class="input-group-addon" id="text-symbol" aria-hidden="true") C
-                input#chat-text(type='text' name='text' placeholder='Chat Text' class='form-control' aria-describedby='text-symbol')
-              input(type='submit')
+                input#chat-text(type='text' name='text' placeholder='Chat Text' class='form-control' aria-describedby='text-symbol', autocomplete='off')
+              input#chat-submit(type='submit')
           li.sidebar-brand CHAT
           div
             ul#chat-list.list-group
@@ -26,7 +26,10 @@ html
       div#page-content-wrapper(tabindex='0')
         div.container-fluid
           canvas#canvas
-          h1= options.title
+          if room
+            h1 #{options.title} in "#{room}"
+          else
+            h1= options.title
 
           div.input-group
             label(for='slider') Volume
@@ -45,7 +48,7 @@ html
             input#detune1(type='range' min='-1200' max='1200')
           div.input-group
             label(for='shape2') Oscillator 2
-            select#shape2.form-control(name='shape')
+            select#shape2.form-control(name='shape2')
               option(value='sine') sine
               option(value='square') square
               option(value='sawtooth') sawtooth
@@ -93,8 +96,17 @@ html
                 td#key79.black-key O
                 td#key76 L
                 td#key80.black-key P
-          div
-            a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Toggle Chat
+          div.row
+            .col-sm-3
+              a(href="menu-toggle" class="btn btn-default" class="menu-toggle") Toggle Chat
+            .col-sm-3
+              select#presets.form-control(name='presets')
+                option(disabled='disabled' selected='selected' hidden='hidden') Your Presets
+            .col-sm-6
+              form.form-inline
+                .form-group
+                  input#new-preset.form-control(type='text', name='new-preset', required)
+                  input#save-preset.btn.btn-default(type='submit', value='Save Preset')
 
 
     script(src='vendor/jquery/dist/jquery.min.js')
@@ -103,3 +115,4 @@ html
     script(src='js/display.js')
     script(src='js/main.js')
     script(src='js/chat.js')
+    script(src='js/save.js')
