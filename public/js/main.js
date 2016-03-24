@@ -271,19 +271,9 @@ render();
 
 // release key, currently really only toggling class as the pressKey function sets the length of note
   function releaseKey (event) {
-    // console.log('released key')
     const garbage = []
     for (let i = 0; i < nodes.length; i++) {
       if (nodes[i].code === event.keyCode) {
-        // nodes[i].node.stop(0)
-        // nodes[i].node.disconnect()
-        // testing end note
-        // const endNote = new Date()
-        // nodes[i].length = endNote - nodes[i].length
-        // console.log('nodes i dot length', nodes[i].length)
-        // ws.emit('sendNoteEnd')
-        // end testing
-        // show key that you pressed
         $(`#key${event.keyCode}`).toggleClass('highlight')
         garbage.push(i)
       }

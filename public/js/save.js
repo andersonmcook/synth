@@ -4,20 +4,17 @@
     console.log('in save.js')
 
 // load history
-    let history = JSON.parse(localStorage.getItem("synth-sockets-presets"))
-    // console.log(history)
+    let history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {}
 
 // put history into presets select
     $.each(history, function (key, value) {
-      // console.log('key', key, 'value', value)
       $('#presets').append($('<option />').val(key).text(key))
     })
 
 // save presets to local storage
     function savePreset (event) {
       event.preventDefault()
-      // const history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {}
-      history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {}
+      // history = JSON.parse(localStorage.getItem("synth-sockets-presets")) || {}
       const name = $('#new-preset').val()
       if (history.hasOwnProperty(name) === false) {
         history[name] = {
@@ -32,7 +29,7 @@
         history = history
       }
       $('#new-preset').val('')
-      console.log('saved preset')
+      // console.log('saved preset')
     }
 
 // load preset into synth
@@ -50,8 +47,11 @@
     }
 
 // stop listening to typing in #new-preset
-    $('#new-preset').focus(function (event) {
-      console.log('new preset has focus')
+    $('#new-preset').keydown(function (event) {
+      event.stopPropagation()
+    })
+
+    $('#new-preset').keyup(function (event) {
       event.stopPropagation()
     })
 

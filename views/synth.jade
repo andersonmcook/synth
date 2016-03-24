@@ -16,7 +16,7 @@ html
                 input#chat-name(type='text' name='name' placeholder='Name' class='form-control' aria-describedby='name-symbol')
               .input-group
                 span(class="input-group-addon" id="text-symbol" aria-hidden="true") C
-                input#chat-text(type='text' name='text' placeholder='Chat Text' class='form-control' aria-describedby='text-symbol')
+                input#chat-text(type='text' name='text' placeholder='Chat Text' class='form-control' aria-describedby='text-symbol', autocomplete='off')
               input#chat-submit(type='submit')
           li.sidebar-brand CHAT
           div
@@ -103,8 +103,8 @@ html
             .col-sm-6
               form.form-group
                 .input-group
-                  label(for='new-option') New
-                  input#new-preset(type='text', name='new-preset', required)
+                  label(for='new-preset') New Preset
+                  input#new-preset.form-control(type='text', name='new-preset', required)
                   input#save-preset(type='submit', value='Save')
 
 
