@@ -27,9 +27,9 @@ html
         div.container-fluid
           canvas#canvas
           if room
-            h1 #{options.title} in "#{room}"
+            h1.h1 #{options.title} in "#{room}"
           else
-            h1= options.title
+            h1.h1= options.title
 
           div.input-group
             label(for='slider') Volume
