@@ -118,6 +118,7 @@ input[type="range"] {
     width: 100%;
     position: absolute;
     padding: 15px;
+    outline: none;
 }
 
 #wrapper.toggled #page-content-wrapper {
