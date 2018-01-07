@@ -135,7 +135,9 @@ render();
 
   // shape 1 listener
   const shape = document.getElementById('shape')
-  shape.addEventListener('change', getter(shape))
+  shape.addEventListener('change', function () {
+    getter(shape)
+  })
 
   // detune 1 listener
   const detune1 = document.getElementById('detune1')
@@ -153,7 +155,9 @@ render();
 
   // oscillator 2 listener
   const shape2 = document.getElementById('shape2')
-  shape2.addEventListener('change', getter(shape2))
+  shape2.addEventListener('change', function () {
+    getter(shape2)
+  })
 
   // tempo listener
   const tempo = document.getElementById('tempo')
@@ -235,8 +239,8 @@ render();
       osc.type = getter(shape)
       osc2.type = getter(shape2)
       //set frequency
-      osc.frequency.value = frequencyByKey[event.keyCode]
-      osc2.frequency.value = frequencyByKey[event.keyCode]
+      osc.frequency.value = frequencyByKey[event.keyCode] || 0
+      osc2.frequency.value = frequencyByKey[event.keyCode] || 0
       // set detune
       osc.detune.value = getter(detune1)
       osc2.detune.value = getter(detune2)
